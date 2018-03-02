@@ -50,8 +50,12 @@
         this.retrieveDropDownItems();
       }
 
-      this.renderDropDownItems(this.dropDownItems);
-      window.parent.document.openedDropDownButton = this;
+      var that = this;
+      var scriptUrl = this.model.viewModel.$el.attr('data-sc-PageCodeScriptFileName');
+      require(["sitecore", scriptUrl], function () {
+        that.renderDropDownItems(that.dropDownItems);
+        window.parent.document.openedDropDownButton = that;
+      });
     },
 
     closeDropDownButtonList: function () {
